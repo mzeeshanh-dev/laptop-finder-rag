@@ -1,0 +1,27 @@
+# Local environments and caches
+venv/
+.venv/
+env/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Generated at runtime (rebuilt inside the container / stored in a volume)
+data/
+
+# VCS, editors, OS
+.git/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Secrets / logs
+.env
+*.log

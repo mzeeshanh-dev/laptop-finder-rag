@@ -1,0 +1,21 @@
+services:
+  laptop-rag:
+    build:
+      context: .
+      args:
+        PRELOAD_MODEL: "false"   # "true" bakes the 2.3 GB model into the image
+    image: laptop-rag:latest
+    container_name: laptop-rag
+    ports:
+      - "8000:8000"
+    environment:
+      EMBED_MODEL: "BAAI/bge-m3"   # smaller option: BAAI/bge-small-en-v1.5 (~130 MB, English only)
+      ENABLE_DENSE: "true"         # "false" = BM25-only: no model download, runs in ~0.5 GB RAM
+    volumes:
+      - hf-models:/models        # BGE-M3 download, kept across restarts
+      - rag-data:/app/data       # cleaned CSV, chunks and cached embeddings
+    restart: unless-stopped
+
+volumes:
+  hf-models:
+  rag-data:
